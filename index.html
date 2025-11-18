@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dino Quiz Runner</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="game-container">
+    <h1>Dino Quiz Runner</h1>
+    <canvas id="game" width="800" height="300"></canvas>
+    <p class="instructions">
+      Press <strong>Space</strong> or <strong>↑</strong> to jump.  
+      Every 10 seconds a quiz appears – get it wrong and the game restarts!
+    </p>
+  </div>
+
+  <!-- Quiz overlay -->
+  <div id="quiz-overlay" class="quiz-overlay">
+    <div class="quiz-box">
+      <h2 id="quiz-question">Question text</h2>
+      <div id="quiz-options" class="quiz-options"></div>
+      <p class="quiz-hint">Click an answer. Correct = continue, Wrong = restart.</p>
+    </div>
+  </div>
+
+  <!-- Death overlay -->
+  <div id="death-overlay" class="quiz-overlay">
+    <div class="quiz-box">
+      <h2 id="death-message"></h2>
+      <p class="quiz-hint">Press any key to try again</p>
+    </div>
+  </div>
+
+  <!-- Wrong answer overlay -->
+  <div id="wrong-overlay" class="quiz-overlay">
+    <div class="quiz-box">
+      <h2>
+        We are disappointed because you clearly didn't listen to our presentation,
+        as that answer was wrong.
+      </h2>
+      <p class="quiz-hint">Press any key to try again</p>
+    </div>
+  </div>
+
+  <!-- Correct answer countdown overlay -->
+  <div id="correct-overlay" class="quiz-overlay">
+    <div class="quiz-box" style="text-align:center">
+      <h2 id="correct-main">Correct, game will resume in</h2>
+      <h1 id="correct-count" style="font-size: 40px; margin-top: 10px;">3</h1>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+
+
+
+  <script src="script.js"></script>
+</body>
+</html>
