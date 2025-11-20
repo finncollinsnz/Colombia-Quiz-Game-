@@ -40,7 +40,7 @@ parrotImg.onload = () => {
 
 // ---- Game constants / state ----
 let gameSpeed = 600;           // starts fast
-const SPEED_ACCEL = 20;        // how quickly speed increases (pixels/s per second)
+const SPEED_ACCEL = 18;        // how quickly speed increases (pixels/s per second)
 const gravity = 3200;          // stronger gravity for quick jumps
 
 const groundY = HEIGHT - 10;   // near bottom of canvas
@@ -75,21 +75,94 @@ let quizIndex = 0;
 // Simple example questions – change these to your class questions
 const quizData = [
   {
-    question: "What key do you use to jump in this game?",
-    options: ["A", "Space or Up Arrow", "Shift", "Ctrl"],
-    correctIndex: 1,
+    question: "Approximately how many civilians have been killed in *La Violencia* and the Colombian Conflict combined?",
+    options: ["125 thousand", "375 thousand", "250 thousand", "500 thousand"],
+    correctIndex: 1
   },
   {
-    question: "What is the girl trying to avoid?",
-    options: ["Cars", "Houses and parrots", "Coins", "Water"],
-    correctIndex: 1,
+    question: "Which cartel was Pablo Escobar the leader of?",
+    options: ["The Black Eagles", "FARC", "Medellín Cartel", "ELN"],
+    correctIndex: 2
   },
   {
-    question: "What happens if you answer a question wrong?",
-    options: ["Nothing", "You get more points", "The game restarts", "The game speeds up"],
-    correctIndex: 2,
+    question: "When did La Violencia start?",
+    options: ["1948", "1946", "1958", "1956"],
+    correctIndex: 0
   },
+  {
+    question: "Before the Spanish conquest, which region of Colombia was home to the Muisca people, known for their organised society and use of gold?",
+    options: ["Caribbean Coast", "Amazon Basin", "Andean Highlands", "Pacific Lowlands"],
+    correctIndex: 2
+  },
+  {
+    question: "During the colonial period, which activity became one of the main pillars of Colombia's economy?",
+    options: ["Large-scale fishing", "Mining for precious metals", "Cotton manufacturing", "Trade"],
+    correctIndex: 1
+  },
+  {
+    question: "Which major historical event led to the beginning of Colombia’s independence movement?",
+    options: [
+      "Invention of the steam engine",
+      "Decline of Spain's Caribbean trade monopoly",
+      "Bourbon reforms in the Spanish Empire",
+      "French Revolution and Napoleonic invasions"
+    ],
+    correctIndex: 3
+  },
+  {
+    question: "Why are they called big-bottomed ants?",
+    options: [
+      "Because they are filled with food",
+      "Because they are very large ants",
+      "Because they are all queen ants",
+      "Because they are all female ants"
+    ],
+    correctIndex: 2
+  },
+  {
+    question: "In the dance Cumbia, what do the women traditionally hold in front of them?",
+    options: ["A hat", "A candle", "A light", "Nothing"],
+    correctIndex: 1
+  },
+  {
+    question: "On the Día de las Velitas, how heavy can the flower bundles get up to?",
+    options: ["30 kg", "50 kg", "80 kg", "Over 100 kg"],
+    correctIndex: 3
+  },
+  {
+    question: "How many national parks does Colombia have?",
+    options: ["39", "59", "69", "79"],
+    correctIndex: 1
+  },
+  {
+    question: "Fernando Botero, the famous Colombian artist, was known for what kind of work?",
+    options: [
+      "Colourful people",
+      "Use of strange materials",
+      "Painting and sculpting in large proportions",
+      "Use of black and white"
+    ],
+    correctIndex: 2
+  },
+  {
+    question: "Was Egan Bernal famous as a cyclist or a footballer?",
+    options: ["Cyclist", "Footballer"],
+    correctIndex: 0
+  },
+  {
+    question: "What is the average temperature in Colombia?",
+    options: ["24°C", "27°C", "20°C", "29°C"],
+    correctIndex: 1
+  }
 ];
+
+function shuffleArray(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+}
+
 
 // Quiz DOM elements
 const quizOverlay = document.getElementById("quiz-overlay");
@@ -184,6 +257,8 @@ function stopDuck() {
 // ---- Game logic ----
 
 function resetGame() {
+  shuffleArray(quizData);
+
   obstacles = [];
   score = 0;
 
@@ -228,8 +303,8 @@ function spawnObstacle() {
   x = WIDTH + 20;
 
   if (type === "house") {
-    width = 60;
-    height = 70;              // smaller house so you can jump over it
+    width = 50;
+    height = 60;              // smaller house so you can jump over it
     y = groundY - height;     // sits on the ground
   } else {
     width = 80;
@@ -314,10 +389,10 @@ function showDeathScreen() {
   deathActive = true;
 
   let msg;
-  if (lastHitType === "house") {
-    msg = "Well done, you just ran headlong into a house.";
-  } else if (lastHitType === "parrot") {
-    msg = "Well done, you just ran headlong into a parrot.";
+  if (lastHitType === "parrot") {
+    msg = "Well done, you just ran headlong into the Scarlet Macaw which is a native bird of Colombia, often found in areas such as the Amazon Basin.";
+  } else if (lastHitType === "house") {
+    msg = "Well done, you just ran headlong into a traditional Paisa house, typical of rural Colombia, made with clay, bamboo and mud plaster.";
   } else {
     msg = "Well done, you just ran headlong into something.";
   }
@@ -325,6 +400,7 @@ function showDeathScreen() {
   deathMessageEl.textContent = msg;
   deathOverlay.style.display = "flex";
 }
+
 
 
 
